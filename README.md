@@ -7,7 +7,7 @@ A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 - [Intallation](#installation)
 - [Usage](#usage)
 - [TODO](#todo)
-- [Known Issues](#issues)
+- [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [Credits](#credits)
 
