@@ -7,6 +7,7 @@ A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 - [Intallation](#installation)
 - [Usage](#usage)
 - [TODO](#todo)
+- [Known Issues](#issues)
 - [Contributing](#contributing)
 - [Credits](#credits)
 
@@ -57,6 +58,12 @@ FreeCADGui.showMainWindow()
 - automatic installer for the kernelspec
 - create example notebooks
 - explore how to use matplotlib better
+
+## Known Issues
+
+- matplotlib "inline" backend doesn't work
+- Python-Shell inside FreeCAD doesn't work when running the kernel
+- the Conda recipes for FreeCAD seem to use PyQT and not PySide
 
 
 ## Contributing
