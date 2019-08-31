@@ -55,9 +55,9 @@ FreeCADGui.showMainWindow()
 
 ## TODO
 
-- automatic installer for the kernelspec
-- create example notebooks
-- explore how to use matplotlib better
+- [ ] automatic installer for the kernelspec
+- [ ] create example notebooks
+- [ ] explore how to use matplotlib better
 
 ## Known Issues
 
