@@ -15,6 +15,8 @@ A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 
 This has only been tested on Ubuntu. You may be able to get this to work on Windows or OSX.
 
+### Using Conda
+
 First you need to have FreeCAD installed in a Conda environment as shown here: https://github.com/FreeCAD/FreeCAD_Conda
 
 ```batch
@@ -32,8 +34,6 @@ Put the following `kernel.json` file there, and replace the first "argv" entry t
   "my-conda-envs/freecad2/bin/python3",
   "-m",
   "freecad_jupyter",
-  "--gui","qt5",
-  "--matplotlib","qt5",
   "-f",
   "{connection_file}"
  ],
@@ -41,17 +41,52 @@ Put the following `kernel.json` file there, and replace the first "argv" entry t
  "language": "python"
 }
 ```
+
+### System Python 3.7 and self-built FreeCAD Daily
+
+I had the best results os far with building FreeCAD myself and using the system Python.
+
+```bash
+$ /usr/bin/pip3 install --user ipykernel
+$ cd ~/freecad_jupyter
+$ /usr/bin/pip3 install --user -e .
+```
+
+You need a kernelspec like the following:
+
+```json
+{
+ "argv": [
+  "/usr/bin/python3.7",
+  "-m",
+  "freecad_jupyter",
+  "-f",
+  "{connection_file}"
+ ],
+ "env":{"FREECAD_PATH":"/home/myself/freecad-build"},
+ "display_name": "Freecad(GUI)",
+ "language": "python"
+}
+```
+
 ## Usage
 
-Now you can choose the "FreeCAD(GUI)" kernel in Jupyter notebook or lab. The kernel is already running in qt5 mode.
+Now you can choose the "FreeCAD(GUI)" kernel in Jupyter notebook or lab. 
 
 To launch the main window do this:
 
 ```python
 import FreeCAD
 import FreeCADGui
+%gui qt5
 FreeCADGui.showMainWindow()
 ```
+
+It's important to set up the qt5 gui integration (`%gui qt5`) after importing FreeCADGui,
+because otherwise the IPython kernel will initialize PyQT5 instead of PySide and FreeCAD will get confused!
+
+You may also only import `FreeCAD` if you don't need the GUI.
+
 
 ## TODO
 
