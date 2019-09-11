@@ -7,7 +7,7 @@ A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 - [Intallation](#installation)
 - [Usage](#usage)
 - [TODO](#todo)
-- [Known Issues](#issues)
+- [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [Credits](#credits)
 
@@ -90,9 +90,9 @@ You may also only import `FreeCAD` if you don't need the GUI.
 
 ## TODO
 
-- automatic installer for the kernelspec
-- create example notebooks
-- explore how to use matplotlib better
+- [ ] automatic installer for the kernelspec
+- [ ] create example notebooks
+- [ ] explore how to use matplotlib better
 
 ## Known Issues
 
