@@ -9,6 +9,18 @@ sys.path.append(str(base)+"/")
 sys.path.append(str(base/"lib")+"/")
 
 from ipykernel import kernelapp as app
-import ipykernel
-app.launch_new_instance()
-ipykernel.start_kernel()
+from traitlets.config import Config
+c = Config()
+c.IPKernelApp.gui="qt5"
+
+c.IPKernelApp.code_to_run="""
+from freecad_jupyter import init_gui
+init_gui()
+
+"""
+print(c)
+#@register_line_magic
+#def freecad_gui(line):
+#    print("hello World")
+#    return line
+app.launch_new_instance(config=c)

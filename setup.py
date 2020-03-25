@@ -22,9 +22,9 @@ Links:
 
 from setuptools import setup, find_packages
 
-requirements = [ ]
+requirements = ['ipykernel']
 
-setup_requirements = [ ]
+setup_requirements = []
 
 test_requirements = [ ]
 
