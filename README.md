@@ -6,8 +6,6 @@ A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 
 - [Intallation](#installation)
 - [Usage](#usage)
-- [TODO](#todo)
-- [Known Issues](#known-issues)
 - [Contributing](#contributing)
 - [Credits](#credits)
 
@@ -15,91 +13,57 @@ A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 
 This has only been tested on Ubuntu. You may be able to get this to work on Windows or OSX.
 
-### Using Conda
+The main issue, in the belief of this package's author, is that FreeCAD is extremely clumsy, messy and particular about importing its various python modules and C extensions. According to the documentation it should be just
+as easy as adding one directory to the library path and "import FreeCAD",
+but it isn't, and the behavior of those modules changed somewhat even since
+the author has been experimenting with it.
 
-First you need to have FreeCAD installed in a Conda environment as shown here: https://github.com/FreeCAD/FreeCAD_Conda
+### Conda
 
-```batch
+Conda is a package manager for Python and other programming languages. You need to install that first.
 
-    $ pip install git+https://github.com/akloster/freecad_jupyter
+> conda create --name fcenv-dev --channel freecad/label/dev freecad jupyter notebook ipython pyside2
+> pip install git+https://github.com/akloster/freecad_jupyter
+
+Now the next step is to install the kernel.
+
+Create a file at ~/.local/share/jupyter/kernels/freecad-conda/kernels.json with the following content:
+
 ```
-
-You will also need to install a kernelspec. Kernels are stored for example at `~/.local/share/jupyter/kernels`. Make a new directory there, for example called "freecad". The name doesn't matter.
-
-Put the following `kernel.json` file there, and replace the first "argv" entry to find the right Python executable:
-
-```json
 {
  "argv": [
-  "my-conda-envs/freecad2/bin/python3",
+  "{your-anaconda-environment}/bin/python3",
   "-m",
   "freecad_jupyter",
   "-f",
   "{connection_file}"
  ],
- "display_name": "FreeCad(GUI)",
+ "display_name": "FreeCad (conda,dev)",
  "language": "python"
 }
-```
+```      
 
-### System Python 3.7 and self-built FreeCAD Daily
-
-I had the best results os far with building FreeCAD myself and using the system Python.
-
-```bash
-$ /usr/bin/pip3 install --user ipykernel
-$ cd ~/freecad_jupyter
-$ /usr/bin/pip3 install --user -e .
-```
-
-You need a kernelspec like the following:
-
-```json
-{
- "argv": [
-  "/usr/bin/python3.7",
-  "-m",
-  "freecad_jupyter",
-  "-f",
-  "{connection_file}"
- ],
- "env":{"FREECAD_PATH":"/home/myself/freecad-build"},
- "display_name": "Freecad(GUI)",
- "language": "python"
-}
-```
+You have to replace {your-anaconda-environment} with the directory of your anaconda environment.
 
 ## Usage
 
-Now you can choose the "FreeCAD(GUI)" kernel in Jupyter notebook or lab. 
+Most FreeCAD Functionality should work as expected. Some Addons don't.
 
-To launch the main window do this:
+You need to initialize FreeCAD in your notebook with 
 
-```python
-import FreeCAD
-import FreeCADGui
-%gui qt5
-FreeCADGui.showMainWindow()
-```
+>%init_freecad gui
 
-It's important to set up the qt5 gui integration (`%gui qt5`) after importing FreeCADGui,
-because otherwise the IPython kernel will initialize PyQT5 instead of PySide and FreeCAD will get confused!
+That will modify the Pythonpath, configure the QT Event loop, import FreeCAD and open the main window.
 
-You may also only import `FreeCAD` if you don't need the GUI.
+Check the version of Freecad you installed through the "about" dialog. If it is a lot older than you expect, then you should try creating a brand new conda environment and make sure to use the command written in the above installation instructions. Otherwise you might get an older build or one for an older version of Python.
 
+## More Details
 
-## TODO
+The Jupyter server allows you to connect to many different kernels, which can offer different environments and programming languages. They can run locally on the same machine as the server or even remotely over a network.
 
-- [ ] automatic installer for the kernelspec
-- [ ] create example notebooks
-- [ ] explore how to use matplotlib better
+What this package here simply does is to wrap the usual "IPython" kernel application such that it works nicely with FreeCAD. To do this, it is important to put the Kernel in QT mode, and import the Pyside2 libraries before anything else has the opportunity to mess this up.
 
-## Known Issues
-
-- matplotlib "inline" backend doesn't work
-- Python-Shell inside FreeCAD doesn't work when running the kernel
-- the Conda recipes for FreeCAD seem to use PyQT and not PySide
-
+This has only been tested on Ubuntu, not on other Linux systems or even Windows. Technically it should be possible to make it work, but there will be differences in how to make sure the right Python libraries talk to the right FreeCAD libraries the right way. 
 
 ## Contributing
 
