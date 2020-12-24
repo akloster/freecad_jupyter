@@ -2,15 +2,6 @@
 # -*- coding: utf-8 -*-
 
 """
-===============================
-HtmlTestRunner
-===============================
-
-
-.. image:: https://img.shields.io/pypi/v/freecad_jupyter.svg
-        :target: https://pypi.python.org/pypi/freecad_jupyter
-.. image:: https://img.shields.io/travis/akloster/freecad_jupyter.svg
-        :target: https://travis-ci.org/akloster/freecad_jupyter
 
 A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab
 
@@ -36,8 +27,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
     description="A Kernel and Utilities to control FreeCAD from Jupyter Notebook and Lab",
     install_requires=requirements,

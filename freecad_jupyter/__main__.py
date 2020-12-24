@@ -1,6 +1,6 @@
-import sys
 import os
-
+import sys
+import pathlib
 
 def run_kernel():
     from PySide2.QtWidgets import (QLineEdit, QPushButton, QApplication,
