@@ -20,10 +20,17 @@ the author has been experimenting with it.
 
 ### Conda
 
-Conda is a package manager for Python and other programming languages. You need to install that first.
+Conda is a package manager for Python and other programming languages. You need to download and install that first.
 
-> conda create --name fcenv-dev --channel freecad/label/dev freecad jupyter notebook ipython pyside2
+> conda create --name fcenv-dev --channel conda-forge --channel freecad/label/dev freecad
 > pip install git+https://github.com/akloster/freecad_jupyter
+
+This worked at the time of this writing. It sometimes brakes. The solution often is to search for and install the latest working build:
+
+> conda search -channel conda-forge --channel freecad/label/dev freecad
+> conda create --name fcenv-dev --channel conda-forge --channel freecad/label/dev freecad=0.19_pre=py19__etc
+
+That's the price you pay for cutting edge builds.
 
 Now the next step is to install the kernel.
 
